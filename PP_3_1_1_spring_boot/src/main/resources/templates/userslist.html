@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+<body>
+<h1>Список пользователей</h1>
+
+<table border="1">
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Email</th>
+    </tr>
+    <tr th:each="user, iterStat : ${users}" th:style="${iterStat.odd}? 'background-color: #f2f2f2;'">
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td>
+            <a th:href="@{/users/view(id=${user.id})}">Просмотреть</a>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/users/new}">Добавить нового пользователя</a>
+
+</body>
+</html>
