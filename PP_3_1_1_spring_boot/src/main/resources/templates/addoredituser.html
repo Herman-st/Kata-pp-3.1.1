@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма пользователя</title>
+</head>
+<body>
+<h1 th:text="${user.id} != null ? 'Редактировать пользователя' : 'Добавить пользователя'"></h1>
+
+<form th:if="${user.id} != null" th:action="@{/users/update}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div>
+        <label>Имя:</label>
+        <input type="text" th:field="*{name}" required/>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div>
+        <label>Фамилия:</label>
+        <input type="text" th:field="*{surname}" required/>
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required/>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div>
+        <button type="submit">Сохранить изменения</button>
+        <a th:href="@{/users}">Отмена</a>
+    </div>
+</form>
+
+<form th:unless="${user.id} != null" th:action="@{/users/add}" th:object="${user}" method="post">
+
+    <div>
+        <label>Имя:</label>
+        <input type="text" th:field="*{name}" required/>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div>
+        <label>Фамилия:</label>
+        <input type="text" th:field="*{surname}" required/>
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required/>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div>
+        <button type="submit">Добавить</button>
+        <a th:href="@{/users}">Отмена</a>
+    </div>
+</form>
+</body>
+</html>
